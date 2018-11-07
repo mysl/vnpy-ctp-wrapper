@@ -4737,6 +4737,7 @@ void TdApi::processRspQryProduct(Task task)
 
 void TdApi::processRspQryInstrument(Task task)
 {
+	// Some fields have been removed from CThostFtdcInstrumentField in CTP API 6.3.11
 	PyLock lock;
 	CThostFtdcInstrumentField task_data = any_cast<CThostFtdcInstrumentField>(task.task_data);
 	dict data;
@@ -4749,10 +4750,10 @@ void TdApi::processRspQryInstrument(Task task)
 	data["ExchangeID"] = boost::locale::conv::to_utf<char>(task_data.ExchangeID, std::string("GB2312"));
 	data["DeliveryYear"] = task_data.DeliveryYear;
 	data["MaxLimitOrderVolume"] = task_data.MaxLimitOrderVolume;
-	data["MinSellVolume"] = task_data.MinSellVolume;
+	// data["MinSellVolume"] = task_data.MinSellVolume;
 	data["MinMarketOrderVolume"] = task_data.MinMarketOrderVolume;
 	data["InstrumentName"] = boost::locale::conv::to_utf<char>(task_data.InstrumentName, std::string("GB2312"));
-	data["InstrumentCode"] = boost::locale::conv::to_utf<char>(task_data.InstrumentCode, std::string("GB2312"));
+	// data["InstrumentCode"] = boost::locale::conv::to_utf<char>(task_data.InstrumentCode, std::string("GB2312"));
 	data["IsTrading"] = task_data.IsTrading;
 	data["InstrumentID"] = boost::locale::conv::to_utf<char>(task_data.InstrumentID, std::string("GB2312"));
 	data["LongMarginRatio"] = task_data.LongMarginRatio;
@@ -4762,7 +4763,7 @@ void TdApi::processRspQryInstrument(Task task)
 	data["ProductClass"] = task_data.ProductClass;
 	data["CombinationType"] = task_data.CombinationType;
 	data["OpenDate"] = boost::locale::conv::to_utf<char>(task_data.OpenDate, std::string("GB2312"));
-	data["MinBuyVolume"] = task_data.MinBuyVolume;
+	// data["MinBuyVolume"] = task_data.MinBuyVolume;
 	data["VolumeMultiple"] = task_data.VolumeMultiple;
 	data["UnderlyingInstrID"] = boost::locale::conv::to_utf<char>(task_data.UnderlyingInstrID, std::string("GB2312"));
 	data["PositionDateType"] = task_data.PositionDateType;
@@ -8205,7 +8206,7 @@ int TdApi::reqQuoteAction(dict req, int nRequestID)
 
 int TdApi::reqLockInsert(dict req, int nRequestID)
 {
-	CThostFtdcInputLockField myreq = CThostFtdcInputLockField();
+	/*CThostFtdcInputLockField myreq = CThostFtdcInputLockField();
 	memset(&myreq, 0, sizeof(myreq));
 	getStr(req, "InstrumentID", myreq.InstrumentID);
 	getStr(req, "ExchangeID", myreq.ExchangeID);
@@ -8218,7 +8219,8 @@ int TdApi::reqLockInsert(dict req, int nRequestID)
 	getInt(req, "RequestID", &myreq.RequestID);
 	getChar(req, "LockType", &myreq.LockType);
 	int i = this->api->ReqLockInsert(&myreq, nRequestID);
-	return i;
+	return i;*/
+	throw runtime_error("reqLockInsert is not supported anymore");
 };
 
 int TdApi::reqCombActionInsert(dict req, int nRequestID)
@@ -8616,7 +8618,7 @@ int TdApi::reqQryQuote(dict req, int nRequestID)
 
 int TdApi::reqQryLock(dict req, int nRequestID)
 {
-	CThostFtdcQryLockField myreq = CThostFtdcQryLockField();
+	/*CThostFtdcQryLockField myreq = CThostFtdcQryLockField();
 	memset(&myreq, 0, sizeof(myreq));
 	getStr(req, "InstrumentID", myreq.InstrumentID);
 	getStr(req, "ExchangeID", myreq.ExchangeID);
@@ -8626,42 +8628,46 @@ int TdApi::reqQryLock(dict req, int nRequestID)
 	getStr(req, "LockSysID", myreq.LockSysID);
 	getStr(req, "InsertTimeEnd", myreq.InsertTimeEnd);
 	int i = this->api->ReqQryLock(&myreq, nRequestID);
-	return i;
+	return i;*/
+	throw runtime_error("reqQryLock is not supported anymore");
 };
 
 int TdApi::reqQryLockPosition(dict req, int nRequestID)
 {
-	CThostFtdcQryLockPositionField myreq = CThostFtdcQryLockPositionField();
+	/*CThostFtdcQryLockPositionField myreq = CThostFtdcQryLockPositionField();
 	memset(&myreq, 0, sizeof(myreq));
 	getStr(req, "InstrumentID", myreq.InstrumentID);
 	getStr(req, "InvestorID", myreq.InvestorID);
 	getStr(req, "ExchangeID", myreq.ExchangeID);
 	getStr(req, "BrokerID", myreq.BrokerID);
 	int i = this->api->ReqQryLockPosition(&myreq, nRequestID);
-	return i;
+	return i;*/
+	throw runtime_error("reqQryLockPosition is not supported anymore");
 };
 
 int TdApi::reqQryInvestorLevel(dict req, int nRequestID)
 {
-	CThostFtdcQryInvestorLevelField myreq = CThostFtdcQryInvestorLevelField();
+	/*CThostFtdcQryInvestorLevelField myreq = CThostFtdcQryInvestorLevelField();
 	memset(&myreq, 0, sizeof(myreq));
 	getStr(req, "InvestorID", myreq.InvestorID);
 	getStr(req, "ExchangeID", myreq.ExchangeID);
 	getStr(req, "BrokerID", myreq.BrokerID);
 	int i = this->api->ReqQryInvestorLevel(&myreq, nRequestID);
-	return i;
+	return i;*/
+	throw runtime_error("reqQryInvestorLevel is not supported anymore");
 };
 
 int TdApi::reqQryExecFreeze(dict req, int nRequestID)
 {
-	CThostFtdcQryExecFreezeField myreq = CThostFtdcQryExecFreezeField();
+	/*CThostFtdcQryExecFreezeField myreq = CThostFtdcQryExecFreezeField();
 	memset(&myreq, 0, sizeof(myreq));
 	getStr(req, "InstrumentID", myreq.InstrumentID);
 	getStr(req, "InvestorID", myreq.InvestorID);
 	getStr(req, "ExchangeID", myreq.ExchangeID);
 	getStr(req, "BrokerID", myreq.BrokerID);
 	int i = this->api->ReqQryExecFreeze(&myreq, nRequestID);
-	return i;
+	return i;*/
+	throw runtime_error("reqQryExecFreeze is not supported anymore");
 };
 
 int TdApi::reqQryCombInstrumentGuard(dict req, int nRequestID)

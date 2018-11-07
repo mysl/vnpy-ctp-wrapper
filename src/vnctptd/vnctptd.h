@@ -27,6 +27,7 @@
 
 //API
 #include "ThostFtdcTraderApi.h"
+#include "ThostFtdcTraderApi_compat.h"
 
 //ÃüÃû¿Õ¼ä
 using namespace std;
